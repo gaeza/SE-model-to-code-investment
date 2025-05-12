@@ -1,36 +1,12 @@
 package investWise;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-class User{
-    private String username;
-    private String email;
-    private String password;
 
-    public User(String userName,String Email,String Password){
-        this.username=userName;
-        this.email=Email;
-        this.password=Password;
-    }
-
-    //for validation
-    public String getEmail(){
-        return email;
-    }
-
-    public String getUserName(){
-        return username;
-    }
-}
-
-public class Sign_up {
-
-    public static List<User>users=new ArrayList<>();
-
+public class SignUp {
+    
     public static boolean isUsedEmail(String Email){
-        for(User user : users){
+        for(User user : User.getUsers()){
             if(user.getEmail().equalsIgnoreCase(Email)){
                 return true;
             }
@@ -39,8 +15,8 @@ public class Sign_up {
     }
 
     public static boolean isUsedUserName(String Name){
-        for(User user : users){
-            if(user.getUserName().equals(Name)){
+        for(User user : User.getUsers()){
+            if(user.getUsername().equals(Name)){
                 return true;
             }
         }
@@ -86,16 +62,13 @@ public class Sign_up {
         System.out.print("Enter Password");
         String password= scanner.nextLine();
 
-        users.add(new User(username,email, password));
+        // Create and add user
+        User newUser = new User(username, email, password);
+        User.addUser(newUser); // add user to the list and save
+
         System.out.println("Sign up successful! Redirecting to login page...");
 
-        scanner.close();
-    }
-
-    public static void main(String[] args) {
-        signUp();  // you can call this in a loop or with a menu in real use
-    }
+        }
     
-
-}
+ }
 

@@ -5,14 +5,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-
 import java.util.List;
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.common.*;
 import org.apache.pdfbox.pdmodel.font.*;
-//import java.io.IOException;
 
-
+/**
+ * Class responsible for generating reports for asset details.
+ */
 public class ReportGenerator {
 
     /**
@@ -37,6 +37,8 @@ public class ReportGenerator {
      * Exports the asset list as a PDF report.
      * 
      * The file is saved to a fixed path.
+     * 
+     * @param assets the list of assets to export
      */
     public void exportReportToPDF(List<Asset> assets) {
         try {
@@ -70,8 +72,8 @@ public class ReportGenerator {
             contentStream.endText();
             contentStream.close();
 
-            // حفظ التقرير في مسار ثابت
-            String filePath = "C:\\Users\\Lenovo\\Documents\\FinantialReport.pdf";  // مسار ثابت
+            // Save the report to a fixed path
+            String filePath = "C:\\Users\\Lenovo\\Documents\\FinantialReport.pdf";
             document.save(filePath);
             System.out.println("PDF report saved at: " + filePath);
         } catch (IOException e) {
@@ -82,46 +84,43 @@ public class ReportGenerator {
     /**
      * Exports the asset list as an Excel report.
      * 
-     * @param assets   the list of assets
+     * @param assets the list of assets to export
      * @param filePath the path to save the Excel file
      */
+    public void exportReportToExcel(List<Asset> assets) {
+        String filePath = "C:\\Users\\Lenovo\\Documents\\FinantialReport.xlsx";  
 
-     public void exportReportToExcel(List<Asset> assets) {
-    String filePath = "C:\\Users\\Lenovo\\Documents\\FinantialReport.xlsx";  
-
-    // إنشاء Workbook جديد
-    Workbook workbook = new XSSFWorkbook();
-    
-    // إنشاء Sheet داخل الـ Workbook
-    Sheet sheet = workbook.createSheet("Financial Report");
-
-    // إضافة صف رأس
-    Row header = sheet.createRow(0);
-    header.createCell(0).setCellValue("Asset Name");
-    header.createCell(1).setCellValue("Type");
-    header.createCell(2).setCellValue("Quantity");
-    header.createCell(3).setCellValue("Purchase Price");
-    header.createCell(4).setCellValue("Purchase Date");
-
-    // إضافة البيانات من القائمة إلى الملف
-    int rowIndex = 1;  // يبدأ من الصف الثاني (لأن الأول مخصص للرأس)
-    for (Asset asset : assets) {
-        Row row = sheet.createRow(rowIndex++);
-        row.createCell(0).setCellValue(asset.getAssetName());
-        row.createCell(1).setCellValue(asset.getType());
-        row.createCell(2).setCellValue(asset.getQuantity());
-        row.createCell(3).setCellValue(asset.getPurchasePrice());
-        row.createCell(4).setCellValue(asset.getPurchaseDate());
-    }
-
-    // حفظ الملف
-    try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
-        workbook.write(fileOut);
-        System.out.println("Excel report saved at: " + filePath);
-    } catch (IOException e) {
-        System.out.println("Error exporting Excel file: " + e.getMessage());
-    }
-}
+        // Create a new Workbook
+        Workbook workbook = new XSSFWorkbook();
         
+        // Create a Sheet inside the Workbook
+        Sheet sheet = workbook.createSheet("Financial Report");
 
+        // Add header row
+        Row header = sheet.createRow(0);
+        header.createCell(0).setCellValue("Asset Name");
+        header.createCell(1).setCellValue("Type");
+        header.createCell(2).setCellValue("Quantity");
+        header.createCell(3).setCellValue("Purchase Price");
+        header.createCell(4).setCellValue("Purchase Date");
+
+        // Add data from the list to the file
+        int rowIndex = 1;  // Start from the second row (the first is for header)
+        for (Asset asset : assets) {
+            Row row = sheet.createRow(rowIndex++);
+            row.createCell(0).setCellValue(asset.getAssetName());
+            row.createCell(1).setCellValue(asset.getType());
+            row.createCell(2).setCellValue(asset.getQuantity());
+            row.createCell(3).setCellValue(asset.getPurchasePrice());
+            row.createCell(4).setCellValue(asset.getPurchaseDate());
+        }
+
+        // Save the file
+        try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
+            workbook.write(fileOut);
+            System.out.println("Excel report saved at: " + filePath);
+        } catch (IOException e) {
+            System.out.println("Error exporting Excel file: " + e.getMessage());
+        }
+    }
 }

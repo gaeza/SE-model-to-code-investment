@@ -54,16 +54,15 @@ public class Main {
                         int formatChoice = scanner.nextInt();
                         scanner.nextLine(); // Consume the newline
 
-                        // No need to ask for file path anymore
+                        // Export the selected format
                         if (formatChoice == 1) {
-                              // Export as Excel (بما أن المسار ثابت داخل الدالة، لا حاجة لإدخال المسار هنا)
-                              reportGenerator.exportReportToPDF(portfolio.getAssets());
-                           
+                            // Export as PDF
+                            reportGenerator.exportReportToPDF(portfolio.getAssets());
                         } else if (formatChoice == 2) {
                             // Export as Excel
                             reportGenerator.exportReportToExcel(portfolio.getAssets());
                         } else {
-;
+                            System.out.println("Invalid format choice.");
                         }
                     }
                     break;

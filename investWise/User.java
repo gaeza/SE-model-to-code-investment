@@ -1,4 +1,7 @@
-// --- User.java ---
+/** 
+ *--- User.java ---
+
+*/ 
 package investWise;
 
 import java.io.Serializable;
@@ -20,12 +23,23 @@ public class User implements Serializable {
     private static final String FILE_NAME = "users.ser";
     private static List<User> users = new ArrayList<>();
 
+    /**
+     * this is the constructor
+     * constructor
+     * @param username 
+     * @param email
+     * @param password
+     */
     public User(String userName, String email, String password) {
         this.username = userName;
         this.email = email;
         this.password = password;
     }
 
+    /**
+     * this is get email methode will used in login later
+     * @return email
+     */
     public String getEmail() {
         return email;
     }

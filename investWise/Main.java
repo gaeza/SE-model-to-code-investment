@@ -63,7 +63,7 @@ public class Main {
                             // Export as Excel
                             reportGenerator.exportReportToExcel(portfolio.getAssets());
                         } else {
-                            System.out.println("Invalid format.");
+;
                         }
                     }
                     break;

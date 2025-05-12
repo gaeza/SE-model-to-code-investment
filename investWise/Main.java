@@ -56,12 +56,13 @@ public class Main {
 
                         // No need to ask for file path anymore
                         if (formatChoice == 1) {
-                            // Export as PDF (it uses the fixed path inside the ReportGenerator)
-                            reportGenerator.exportReportToPDF(portfolio.getAssets());
-                        } /*else if (formatChoice == 2) {
+                              // Export as Excel (بما أن المسار ثابت داخل الدالة، لا حاجة لإدخال المسار هنا)
+                              reportGenerator.exportReportToPDF(portfolio.getAssets());
+                           
+                        } else if (formatChoice == 2) {
                             // Export as Excel
-                            reportGenerator.exportReportToExcel(portfolio.getAssets(), "C:\\Users\\Lenovo\\Documents\\ZakatReport.xlsx");
-                        }*/ else {
+                            reportGenerator.exportReportToExcel(portfolio.getAssets());
+                        } else {
                             System.out.println("Invalid format.");
                         }
                     }
